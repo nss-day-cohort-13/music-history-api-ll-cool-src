@@ -38,6 +38,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', 'MainFactory', functi
     $scope.name = "";
     $scope.albumTitle = "";
     $scope.albumArtist = "";
+    $scope.albumYear = 0;
     $scope.trackTitle = "";
     $scope.trackArtitst = "";
     $scope.trackAlbum = "";
@@ -64,7 +65,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', 'MainFactory', functi
             url: "http://localhost:8000/albums/", 
         method: "POST", 
         headers: {"Content-Type": "application/json"}, 
-        data: {"title": $scope.albumTitle, "artist": $scope.albumArtist}
+        data: {"title": $scope.albumTitle, "artist": $scope.albumArtist, "yearReleased": $scope.albumYear}
         })
         .then(album => {
             $scope.albums.push(album.data)

@@ -100,6 +100,8 @@
         <select ng-model="albumArtist">
                 <option ng-repeat="artist in artists" value="http://localhost:8000/artists/{{ artist.id }}/">{{ artist.name }}</option>
         </select>
+        <label>Year Released:</label>
+        <input class="form-control" type="int" name="year" ng-model="albumYear">
         <input class="btn btn-lg btn-primary" type="submit" value="Submit" />
     </form>
 
