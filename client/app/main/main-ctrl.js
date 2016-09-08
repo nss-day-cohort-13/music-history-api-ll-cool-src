@@ -35,9 +35,9 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', 'MainFactory', functi
         })
 
 // Filters for what displays on page
-    $scope.showCategory = 'tracks';  // Boolean; shows only a certain category (artist, album, track)
-    $scope.showArtist = null; // Artist; shows tracks by selected artist
-    $scope.showAlbum = null; // Album; shows tracks on the selected album
+    $scope.showCategory = 'tracks';  // Category; shows only a certain category (artist, album, track)
+    $scope.showArtist = null; // Artist name; shows tracks by selected artist
+    $scope.showAlbum = null; // Album titlge; shows tracks on the selected album
 
 
 // Logic for filters

@@ -13,12 +13,12 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-2">
-            <select>
-                <option ng-repeat="artist in artists">{{ artist.name }}</option>
+            <select ng-model="showArtist">
+                <option ng-repeat="artist in artists" value="{{artist.name}}">{{ artist.name }}</option>
             </select>
             <br />
-            <select>
-                <option ng-repeat="album in albums">{{ album.title }}</option>
+            <select ng-model="showAlbum">
+                <option ng-repeat="album in albums" value="{{album.title}}">{{ album.title }}</option>
             </select>
         </div>
 
@@ -75,7 +75,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="track in tracks">
+                        <tr ng-repeat="track in tracks" ng-show="(showArtist === null ? true : getTrackArtistName(track.album) === showArtist) && (showAlbum === null ? true : getAlbumName(track.album) === showAlbum)">
                             <td>{{ track.title }}</td>
                             <td>{{ getTrackArtistName(track.album) }}</td>
                             <td>{{ getAlbumName(track.album) }}</td>
