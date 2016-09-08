@@ -14,12 +14,12 @@
     <div class="row">
         <div class="col-lg-2">
             <label>Filter by artist:</label>
-            <select ng-model="showArtist" ng-change="showAlbum = null">
+            <select ng-model="showArtist" ng-change="showAlbum = null" ng-disabled="showCategory === 'artists' || showCategory === 'albums'">
                 <option ng-repeat="artist in artists" value="{{artist.name}}">{{ artist.name }}</option>
             </select>
             <br />
             <label>Filter by album:</label>
-            <select ng-model="showAlbum" ng-change="showArtist = getArtistName(showAlbum, true)">
+            <select ng-model="showAlbum" ng-change="showArtist = getArtistName(showAlbum, true)" ng-disabled="showCategory === 'artists' || showCategory === 'albums'">
                 <option ng-repeat="album in albums" value="{{album.title}}" ng-show="showArtist === null ? true : getArtistName(album.artist) === showArtist">{{ album.title }}</option>
             </select>
         </div>
