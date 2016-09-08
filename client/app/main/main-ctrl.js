@@ -42,7 +42,19 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', 'MainFactory', functi
 
 // Logic for filters
     $scope.filterCategory = (category) => {
+        $scope.showArtist = null;
+        $scope.showAlbum = null;
         $scope.showCategory = category;
+    }
+
+    $scope.showArtistAlbums = (artist) => {
+        $scope.showCategory = 'albums';
+        $scope.showArtist = artist;
+    }
+
+    $scope.showAlbumTracks = (album) => {
+        $scope.showCategory = 'tracks';
+        $scope.showAlbum = album;
     }
 
 }]);
