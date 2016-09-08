@@ -149,4 +149,9 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', 'MainFactory', functi
         }
     }
 
+    $scope.clearFilters = () => {
+        $scope.showArtist = null;
+        $scope.showAlbum = null;
+    }
+
 }]);

@@ -1,0 +1,18 @@
+.add-form {
+    background: #A5B5BF;
+    padding: 20px;
+    border-radius: 3px;
+}
+
+.row {
+    display: flex;
+}
+
+.sidebar-filters {
+    background: #BD6B73;
+    padding-top: 20px;
+}
+
+.active {
+    color: #BD6B73 !important;
+}
