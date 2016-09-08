@@ -15,9 +15,9 @@
       </form>
     </div>
 </nav>
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-lg-2">
+        <div class="col-lg-2 col-md-2 col-sm-2">
             <label>Filter by artist:</label>
             <select ng-model="showArtist" ng-change="showAlbum = null" ng-disabled="showCategory === 'artists' || showCategory === 'albums'">
                 <option ng-repeat="artist in artists" value="{{artist.name}}">{{ artist.name }}</option>
@@ -29,7 +29,7 @@
             </select>
         </div>
 
-        <div class="col-lg-10" ng-show="showCategory==='artists'">
+        <div class="col-lg-10 col-md-10 col-sm-10" ng-show="showCategory==='artists'">
             <div>
                 <h1>Artists</h1>
                 <table class="table table-striped table-hover">
@@ -48,7 +48,7 @@
             </div>
         </div>
 
-        <div class="col-lg-10" ng-show="showCategory==='albums'">
+        <div class="col-lg-10 col-md-10 col-sm-10" ng-show="showCategory==='albums'">
             <div>
                 <h1>Albums</h1>
                 <table class="table table-striped table-hover">
@@ -70,8 +70,7 @@
             </div>
         </div>
 
-        </div>
-        <div class="col-lg-10" ng-show="showCategory==='tracks'">
+        <div class="col-lg-10 col-md-10 col-sm-10" ng-show="showCategory==='tracks'">
             <div>
                 <h1>Tracks</h1>
                 <table class="table table-striped table-hover">
