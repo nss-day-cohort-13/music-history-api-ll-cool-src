@@ -34,6 +34,7 @@
                     <tbody>
                         <tr ng-repeat="artist in artists">
                             <td>{{ artist.name }}</td>
+                            <td><button ng-click="deleteArtist(artist)">Delete</button></td>
                         </tr>
                     </tbody>
                 </table>
@@ -55,6 +56,7 @@
                         <tr ng-repeat="album in albums">
                             <td>{{ album.title }}</td>
                             <td>{{ getArtistName(album.artist) }}</td>
+                            <td><button ng-click="deleteAlbum(album)">Delete</button></td>
                         </tr>
                     </tbody>
                 </table>
@@ -72,6 +74,7 @@
                             <td>Artist</td>
                             <td>Album</td>
                             <td>Length</td>
+                            <td>Delete</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -80,6 +83,7 @@
                             <td>{{ getTrackArtistName(track.album) }}</td>
                             <td>{{ getAlbumName(track.album) }}</td>
                             <td>{{ track.length | lengthFilter }}</td>
+                            <td><button ng-click="deleteTrack(track)">Delete</button></td>
                         </tr>
                     </tbody>
                 </table>
