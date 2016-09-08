@@ -75,11 +75,23 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', 'MainFactory', functi
         return getAlbum.title;
     }
 
-    $scope.getArtistName = (location) => {
-        let getArtist = $scope.artists.find((artist) => {
-            return artist.url === location;
-        });
-        return getArtist.name;
+    $scope.getArtistName = (param, selectingAlbum) => {
+        if (!selectingAlbum) {
+        // Param is a location, and user is not selecting an album from the dropdown
+            let getArtist = $scope.artists.find((artist) => {
+                return artist.url === param;
+            });
+            return getArtist.name;
+        } else {
+        // Param is a name, and user is selecting an album from the dropdown
+            let getAlbum = $scope.albums.find((album) => {
+                return album.title === param;
+            });
+            let getArtist = $scope.artists.find((artist) => {
+                return artist.url === getAlbum.artist;
+            })
+            return getArtist.name;
+        }
     }
 
 }]);
