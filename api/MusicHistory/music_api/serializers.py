@@ -1,14 +1,20 @@
-from django.contrib.auth.models import User, Group
+from music_api.models import Artist, Album, Track
 from rest_framework import serializers
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class ArtisSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = User
-        fields = ('url', 'username', 'email', 'groups')
+        model = Artist
+        fields = ('id', 'url', 'name')
 
 
-class GroupSerializer(serializers.HyperlinkedModelSerializer):
+class AlbumSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Group
-        fields = ('url', 'name')
+        model = Album
+        fields = ('id', 'url', 'title', 'artist', 'yearReleased')
+
+
+class TrackSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Track
+        fields = ('id', 'url', 'album', 'title', 'genre', 'length')
