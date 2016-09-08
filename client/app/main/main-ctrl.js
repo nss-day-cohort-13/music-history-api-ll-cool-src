@@ -34,6 +34,9 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', 'MainFactory', functi
             console.log("tracks:", $scope.tracks);
         })
 
+// Search bar
+    $scope.userSearch = '';
+
 // Form data
     $scope.name = "";
     $scope.albumTitle = "";
@@ -49,9 +52,9 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', 'MainFactory', functi
 
     $scope.completeArtist = () => {
         $http({
-            url: "http://localhost:8000/artists/", 
-            method: "POST", 
-            headers: {"Content-Type": "application/json"}, 
+            url: "http://localhost:8000/artists/",
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
             data: {"name": $scope.name}
         })
         .then(artist => {
@@ -62,9 +65,9 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', 'MainFactory', functi
 
     $scope.completeAlbum = () => {
         $http({
-            url: "http://localhost:8000/albums/", 
-        method: "POST", 
-        headers: {"Content-Type": "application/json"}, 
+            url: "http://localhost:8000/albums/",
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
         data: {"title": $scope.albumTitle, "artist": $scope.albumArtist, "yearReleased": $scope.albumYear}
         })
         .then(album => {
@@ -75,9 +78,9 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', 'MainFactory', functi
 
     $scope.completeTrack = () => {
         $http({
-            url: "http://localhost:8000/tracks/", 
-            method: "POST", 
-            headers: {"Content-Type": "application/json"}, 
+            url: "http://localhost:8000/tracks/",
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
             data: {"title": $scope.trackTitle, "album": $scope.trackAlbum, "artist": $scope.albumArtist,"genre": $scope.trackGenre, "length": $scope.trackLength}
         })
         .then(track => {
@@ -87,9 +90,9 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', 'MainFactory', functi
     }
 
 // Filters for what displays on page
-    $scope.showCategory = 'tracks';  // Boolean; shows only a certain category (artist, album, track)
-    $scope.showArtist = null; // Artist; shows tracks by selected artist
-    $scope.showAlbum = null; // Album; shows tracks on the selected album
+    $scope.showCategory = 'tracks';  // Category; shows only a certain category (artist, album, track)
+    $scope.showArtist = null; // Artist name; shows tracks by selected artist
+    $scope.showAlbum = null; // Album titlge; shows tracks on the selected album
 
 
 // Logic for filters
@@ -127,11 +130,23 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', 'MainFactory', functi
         return getAlbum.title;
     }
 
-    $scope.getArtistName = (location) => {
-        let getArtist = $scope.artists.find((artist) => {
-            return artist.url === location;
-        });
-        return getArtist.name;
+    $scope.getArtistName = (param, selectingAlbum) => {
+        if (!selectingAlbum) {
+        // Param is a location, and user is not selecting an album from the dropdown
+            let getArtist = $scope.artists.find((artist) => {
+                return artist.url === param;
+            });
+            return getArtist.name;
+        } else {
+        // Param is a name, and user is selecting an album from the dropdown
+            let getAlbum = $scope.albums.find((album) => {
+                return album.title === param;
+            });
+            let getArtist = $scope.artists.find((artist) => {
+                return artist.url === getAlbum.artist;
+            })
+            return getArtist.name;
+        }
     }
 
 }]);

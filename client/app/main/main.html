@@ -8,17 +8,24 @@
             <li><a ng-click="filterCategory('albums')">Albums</a></li>
             <li><a ng-click="filterCategory('tracks')">Tracks</a></li>
         </ul>
+        <form class="navbar-form navbar-left">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search" ng-model="userSearch">
+            </div>
+      </form>
     </div>
 </nav>
 <div class="container">
     <div class="row">
         <div class="col-lg-2">
-            <select>
-                <option ng-repeat="artist in artists">{{ artist.name }}</option>
+            <label>Filter by artist:</label>
+            <select ng-model="showArtist" ng-change="showAlbum = null" ng-disabled="showCategory === 'artists' || showCategory === 'albums'">
+                <option ng-repeat="artist in artists" value="{{artist.name}}">{{ artist.name }}</option>
             </select>
             <br />
-            <select>
-                <option ng-repeat="album in albums">{{ album.title }}</option>
+            <label>Filter by album:</label>
+            <select ng-model="showAlbum" ng-change="showArtist = getArtistName(showAlbum, true)" ng-disabled="showCategory === 'artists' || showCategory === 'albums'">
+                <option ng-repeat="album in albums" value="{{album.title}}" ng-show="showArtist === null ? true : getArtistName(album.artist) === showArtist">{{ album.title }}</option>
             </select>
         </div>
 
@@ -32,7 +39,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="artist in artists">
+                        <tr ng-repeat="artist in artists | filter: userSearch">
                             <td>{{ artist.name }}</td>
                         </tr>
                     </tbody>
@@ -49,12 +56,14 @@
                         <tr>
                             <td>Title</td>
                             <td>Artist</td>
+                            <td>Year</td>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="album in albums">
+                        <tr ng-repeat="album in albums | filter: userSearch">
                             <td>{{ album.title }}</td>
                             <td>{{ getArtistName(album.artist) }}</td>
+                            <td>{{ album.yearReleased }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -71,14 +80,24 @@
                             <td>Title</td>
                             <td>Artist</td>
                             <td>Album</td>
+                            <td>Genre</td>
                             <td>Length</td>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="track in tracks">
+                        <tr ng-repeat="track in tracks | filter: userSearch"
+                            ng-show="
+                            (showArtist === null ?
+                                true :
+                                getTrackArtistName(track.album) === showArtist)
+                            &&
+                            (showAlbum === null ?
+                                true :
+                                getAlbumName(track.album) === showAlbum)">
                             <td>{{ track.title }}</td>
                             <td>{{ getTrackArtistName(track.album) }}</td>
                             <td>{{ getAlbumName(track.album) }}</td>
+                            <td>{{ track.genre }}</td>
                             <td>{{ track.length | lengthFilter }}</td>
                         </tr>
                     </tbody>
