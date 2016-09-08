@@ -1,1 +1,42 @@
-<h1>{{ title }}</h1>
+<div class="row">
+    <div class="col col-xs-4">
+        <a ng-click="filterCategory('artist')">Artists</a>
+    </div>    
+    <div class="col col-xs-4">
+        <a ng-click="filterCategory('album')">Albums</a>
+    </div>    
+    <div class="col col-xs-4">
+        <a ng-click="filterCategory('track')">Tracks</a>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+            <select>
+                <option ng-repeat="artist in songData.artist"></option>
+            </select>
+            <select>
+                <option ng-repeat="album in songData.album"></option>
+            </select>
+        </div>
+
+        <div class="col-sm-9" ng-show="showCategory==='artist'">
+            <div>
+                <h1>Artists</h1>
+            </div>
+        </div>
+
+        <div class="col-sm-9" ng-show="showCategory==='album'">
+            <div>
+                <h1>Ablums</h1>
+            </div>
+        </div>
+
+        </div>
+        <div class="col-sm-9" ng-show="showCategory==='track'">
+            <div>
+                <h1>Tracks</h1>
+            </div>
+        </div>
+    </div>
+</div>
