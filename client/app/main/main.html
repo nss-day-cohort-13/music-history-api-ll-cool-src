@@ -75,7 +75,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="track in tracks" ng-show="(showArtist === null ? true : getTrackArtistName(track.album) === showArtist) && (showAlbum === null ? true : getAlbumName(track.album) === showAlbum)">
+                        <tr ng-repeat="track in tracks"
+                            ng-show="
+                            (showArtist === null ?
+                                true :
+                                getTrackArtistName(track.album) === showArtist)
+                            &&
+                            (showAlbum === null ?
+                                true :
+                                getAlbumName(track.album) === showAlbum)">
                             <td>{{ track.title }}</td>
                             <td>{{ getTrackArtistName(track.album) }}</td>
                             <td>{{ getAlbumName(track.album) }}</td>
