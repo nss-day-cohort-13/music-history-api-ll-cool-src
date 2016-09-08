@@ -41,36 +41,46 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', 'MainFactory', functi
     $scope.trackTitle = "";
     $scope.trackArtitst = "";
     $scope.trackAlbum = "";
+    $scope.trackGenre = "";
     $scope.trackLength = 0;
 
 
 
     $scope.completeArtist = () => {
         $http({
-            url: "/", 
+            url: "http://localhost:8000/artists/", 
             method: "POST", 
             headers: {"Content-Type": "application/json"}, 
             data: {"name": $scope.name}
+        })
+        .then(artist => {
+            $scope.artists.push(artist.data)
         })
         console.log("Artist", $scope.name)
     }
 
     $scope.completeAlbum = () => {
         $http({
-            url: "/", 
+            url: "http://localhost:8000/albums/", 
         method: "POST", 
         headers: {"Content-Type": "application/json"}, 
         data: {"title": $scope.albumTitle, "artist": $scope.albumArtist}
+        })
+        .then(album => {
+            $scope.albums.push(album.data)
         })
         console.log("Album Name", $scope.albumTitle)
     }
 
     $scope.completeTrack = () => {
         $http({
-            url: "/", 
+            url: "http://localhost:8000/tracks/", 
             method: "POST", 
             headers: {"Content-Type": "application/json"}, 
-            data: {"title": $scope.trackTitle, "album": $scope.trackAlbum, "artist": $scope.albumArtist, "length": $scope.trackLength}
+            data: {"title": $scope.trackTitle, "album": $scope.trackAlbum, "artist": $scope.albumArtist,"genre": $scope.trackGenre, "length": $scope.trackLength}
+        })
+        .then(track => {
+            $scope.tracks.push(track.data)
         })
         console.log("Track Name", $scope.trackTitle)
     }
