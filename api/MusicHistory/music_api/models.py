@@ -13,14 +13,14 @@ class Artist(models.Model):
 
 class Album(models.Model):
     title = models.CharField(max_length=100)
-    artist = models.ForeignKey(Artist, related_name='albums')
+    artist = models.ForeignKey(Artist, related_name='albums', on_delete=models.CASCADE)
     yearReleased = models.IntegerField(choices=year, default=1984)
 
     def __str__(self):
         return self.title
 
 class Track(models.Model):
-    album = models.ForeignKey(Album, related_name='tracks')
+    album = models.ForeignKey(Album, related_name='tracks', on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     genre = models.CharField(max_length=100)
     length = models.IntegerField(default=0)
