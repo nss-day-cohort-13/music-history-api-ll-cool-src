@@ -57,7 +57,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', 'MainFactory', functi
         $scope.showAlbum = album;
     }
 
-    $scope.getArtistName = (location) => {
+    $scope.getTrackArtistName = (location) => {
         let getAlbum = $scope.albums.find((album) => {
             return album.url === location;
         });
@@ -72,6 +72,13 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', 'MainFactory', functi
             return album.url === location;
         });
         return getAlbum.title;
+    }
+
+    $scope.getArtistName = (location) => {
+        let getArtist = $scope.artists.find((artist) => {
+            return artist.url === location;
+        });
+        return getArtist.name;
     }
 
 }]);
