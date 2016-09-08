@@ -2,7 +2,7 @@ from music_api.models import Artist, Album, Track
 from rest_framework import serializers
 
 
-class ArtisSerializer(serializers.HyperlinkedModelSerializer):
+class ArtistSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Artist
         fields = ('id', 'url', 'name')
