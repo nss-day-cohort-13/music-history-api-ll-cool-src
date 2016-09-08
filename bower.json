@@ -1,0 +1,22 @@
+{
+  "name": "music-history-api-ll-cool-src",
+  "homepage": "https://github.com/nss-day-cohort-13/music-history-api-ll-cool-src",
+  "authors": [
+    "Chase Ramsey <ramsey.chase@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-route": "^1.5.8",
+    "bootstrap": "^3.3.7"
+  }
+}
