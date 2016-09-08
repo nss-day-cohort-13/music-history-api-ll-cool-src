@@ -35,7 +35,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', 'MainFactory', functi
         })
 
 // Filters for what displays on page
-    $scope.showCategory = null;  // Boolean; shows only a certain category (artist, album, track)
+    $scope.showCategory = 'tracks';  // Boolean; shows only a certain category (artist, album, track)
     $scope.showArtist = null; // Artist; shows tracks by selected artist
     $scope.showAlbum = null; // Album; shows tracks on the selected album
 
@@ -55,6 +55,23 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', 'MainFactory', functi
     $scope.showAlbumTracks = (album) => {
         $scope.showCategory = 'tracks';
         $scope.showAlbum = album;
+    }
+
+    $scope.getArtistName = (location) => {
+        let getAlbum = $scope.albums.find((album) => {
+            return album.url === location;
+        });
+        let getArtist = $scope.artists.find((artist) => {
+            return artist.url === getAlbum.artist;
+        })
+        return getArtist.name;
+    }
+
+    $scope.getAlbumName = (location) => {
+        let getAlbum = $scope.albums.find((album) => {
+            return album.url === location;
+        });
+        return getAlbum.title;
     }
 
 }]);
