@@ -34,6 +34,9 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', 'MainFactory', functi
             console.log("tracks:", $scope.tracks);
         })
 
+// Search bar
+    $scope.userSearch = '';
+
 // Form data
     $scope.name = "";
     $scope.albumTitle = "";
@@ -48,9 +51,9 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', 'MainFactory', functi
 
     $scope.completeArtist = () => {
         $http({
-            url: "http://localhost:8000/artists/", 
-            method: "POST", 
-            headers: {"Content-Type": "application/json"}, 
+            url: "http://localhost:8000/artists/",
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
             data: {"name": $scope.name}
         })
         .then(artist => {
@@ -61,9 +64,9 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', 'MainFactory', functi
 
     $scope.completeAlbum = () => {
         $http({
-            url: "http://localhost:8000/albums/", 
-        method: "POST", 
-        headers: {"Content-Type": "application/json"}, 
+            url: "http://localhost:8000/albums/",
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
         data: {"title": $scope.albumTitle, "artist": $scope.albumArtist}
         })
         .then(album => {
@@ -74,9 +77,9 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', 'MainFactory', functi
 
     $scope.completeTrack = () => {
         $http({
-            url: "http://localhost:8000/tracks/", 
-            method: "POST", 
-            headers: {"Content-Type": "application/json"}, 
+            url: "http://localhost:8000/tracks/",
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
             data: {"title": $scope.trackTitle, "album": $scope.trackAlbum, "artist": $scope.albumArtist,"genre": $scope.trackGenre, "length": $scope.trackLength}
         })
         .then(track => {

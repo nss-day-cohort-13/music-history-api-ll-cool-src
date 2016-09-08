@@ -8,6 +8,11 @@
             <li><a ng-click="filterCategory('albums')">Albums</a></li>
             <li><a ng-click="filterCategory('tracks')">Tracks</a></li>
         </ul>
+        <form class="navbar-form navbar-left">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search" ng-model="userSearch">
+            </div>
+      </form>
     </div>
 </nav>
 <div class="container">
@@ -34,7 +39,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="artist in artists">
+                        <tr ng-repeat="artist in artists | filter: userSearch">
                             <td>{{ artist.name }}</td>
                         </tr>
                     </tbody>
@@ -55,7 +60,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="album in albums">
+                        <tr ng-repeat="album in albums | filter: userSearch">
                             <td>{{ album.title }}</td>
                             <td>{{ getArtistName(album.artist) }}</td>
                             <td>{{ album.yearReleased }}</td>
@@ -80,7 +85,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="track in tracks"
+                        <tr ng-repeat="track in tracks | filter: userSearch"
                             ng-show="
                             (showArtist === null ?
                                 true :
