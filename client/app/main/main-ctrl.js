@@ -45,6 +45,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', 'MainFactory', functi
         $scope.showArtist = null;
         $scope.showAlbum = null;
         $scope.showCategory = category;
+        console.log("category: ", $scope.showCategory);
     }
 
     $scope.showArtistAlbums = (artist) => {
