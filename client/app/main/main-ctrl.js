@@ -34,6 +34,47 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', 'MainFactory', functi
             console.log("tracks:", $scope.tracks);
         })
 
+// Form data
+    $scope.name = "";
+    $scope.albumTitle = "";
+    $scope.albumArtist = "";
+    $scope.trackTitle = "";
+    $scope.trackArtitst = "";
+    $scope.trackAlbum = "";
+    $scope.trackLength = 0;
+
+
+
+    $scope.completeArtist = () => {
+        $http({
+            url: "/", 
+            method: "POST", 
+            headers: {"Content-Type": "application/json"}, 
+            data: {"name": $scope.name}
+        })
+        console.log("Artist", $scope.name)
+    }
+
+    $scope.completeAlbum = () => {
+        $http({
+            url: "/", 
+        method: "POST", 
+        headers: {"Content-Type": "application/json"}, 
+        data: {"title": $scope.albumTitle, "artist": $scope.albumArtist}
+        })
+        console.log("Album Name", $scope.albumTitle)
+    }
+
+    $scope.completeTrack = () => {
+        $http({
+            url: "/", 
+            method: "POST", 
+            headers: {"Content-Type": "application/json"}, 
+            data: {"title": $scope.trackTitle, "album": $scope.trackAlbum, "artist": $scope.albumArtist, "length": $scope.trackLength}
+        })
+        console.log("Track Name", $scope.trackTitle)
+    }
+
 // Filters for what displays on page
     $scope.showCategory = 'tracks';  // Boolean; shows only a certain category (artist, album, track)
     $scope.showArtist = null; // Artist; shows tracks by selected artist

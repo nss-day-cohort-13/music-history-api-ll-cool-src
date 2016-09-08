@@ -87,3 +87,33 @@
         </div>
     </div>
 </div>
+<div class="container-fluid">
+    <form ng-submit="MainCtrl.completeArtist()" ng-show="showCategory==='artists'">
+        <input class="form-control" type="text" name="name" ng-model="name" placeholder="Artist's Name">
+        <input class="btn btn-lg btn-primary" type="submit" value="Submit" />
+
+    </form>
+
+    <form ng-submit="MainCtrl.completeAlbum()" ng-show="showCategory==='albums'">
+        <input class="form-control" type="text" name="title" ng-model="albumTitle" placeholder="Album Name">
+        <label>Artist:</label>
+        <select ng-model="albumArtist">
+                <option ng-repeat="artist in artists" value="{{ artist.name }}">{{ artist.name }}</option>
+        </select>
+        <input class="btn btn-lg btn-primary" type="submit" value="Submit" />
+    </form>
+
+    <form ng-submit="MainCtrl.completeTrack()" ng-show="showCategory==='tracks'">
+        <input class="form-control" type="text" name="title" ng-model="trackTitle" placeholder="Track Name">
+        <label>Album:</label>
+        <select ng-model="trackAlbum">
+                <option ng-repeat="album in albums" value="{{ album.title }}">{{ album.title }}</option>
+        </select>
+        <label>Artist:</label>
+        <select ng-model="trackArtist">
+                <option ng-repeat="artist in artists" value="{{ artist.name }}">{{ artist.name }}</option>
+        </select>
+        <input class="form-control" type="int" name="length" ng-model="trackLength" placeholder="Track Length">
+        <input class="btn btn-lg btn-primary" type="submit" value="Submit" />
+    </form>
+</div>
