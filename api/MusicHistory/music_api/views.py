@@ -19,15 +19,17 @@ class ArtistList(viewsets.ModelViewSet):
     model = Artist
     queryset = Artist.objects.all()
     serializer_class = ArtistSerializer
+    # lookup_field = 'name'
 
 
 class AlbumList(viewsets.ModelViewSet):
     model = Album
     queryset = Album.objects.all()
     serializer_class = AlbumSerializer
-
+    # lookup_field = 'title'
 
 class TrackList(viewsets.ModelViewSet):
     model = Track
     queryset = Track.objects.all()
     serializer_class = TrackSerializer
+    # lookup_field = 'title'
