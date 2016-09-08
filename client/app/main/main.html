@@ -1,1 +1,44 @@
-<h1>{{ title }}</h1>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand">LL COOL SRC</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a ng-click="filterCategory('artist')">Artists</a></li>
+            <li><a ng-click="filterCategory('album')">Albums</a></li>
+            <li><a ng-click="filterCategory('track')">Tracks</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+            <select>
+                <option ng-repeat="artist in artists"></option>
+            </select>
+            <br />
+            <select>
+                <option ng-repeat="album in albums"></option>
+            </select>
+        </div>
+
+        <div class="col-sm-9" ng-show="showCategory==='artists'">
+            <div>
+                <h1>Artists</h1>
+            </div>
+        </div>
+
+        <div class="col-sm-9" ng-show="showCategory==='albums'">
+            <div>
+                <h1>Ablums</h1>
+            </div>
+        </div>
+
+        </div>
+        <div class="col-sm-9" ng-show="showCategory==='tracks'">
+            <div>
+                <h1>Tracks</h1>
+            </div>
+        </div>
+    </div>
+</div>
