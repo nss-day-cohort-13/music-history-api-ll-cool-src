@@ -3,6 +3,8 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', 'MainFactory', functi
 // Fetch all song data; store in $scope.songData
     let rootDir;
 
+
+
     MainFactory.getApiRoot() // Get the API Root directory; this is saved as a fulfilled promise in MainFactory
         .then(root => {
             rootDir = root;                     // Save root directory locally as rootDir
@@ -87,6 +89,39 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', 'MainFactory', functi
             $scope.tracks.push(track.data)
         })
         console.log("Track Name", $scope.trackTitle)
+    }
+
+    $scope.deleteTrack = (item) => {
+        $http({
+            url: item.url,
+            method: "DELETE",
+            headers: {"Content-Type": "application/json"}
+        })
+        .then(() => {
+            $scope.tracks.splice($scope.tracks.indexOf(item), 1)
+        })
+    }
+
+    $scope.deleteAlbum = (item) => {
+        $http({
+            url: item.url,
+            method: "DELETE",
+            headers: {"Content-Type": "application/json"}
+        })
+        .then(() => {
+            $scope.albums.splice($scope.albums.indexOf(item), 1)
+        })
+    }
+
+    $scope.deleteArtist = (item) => {
+        $http({
+            url: item.url,
+            method: "DELETE",
+            headers: {"Content-Type": "application/json"}
+        })
+        .then(() => {
+            $scope.artists.splice($scope.artists.indexOf(item), 1)
+        })
     }
 
 // Filters for what displays on page
