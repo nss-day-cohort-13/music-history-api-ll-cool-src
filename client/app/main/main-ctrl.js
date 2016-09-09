@@ -3,8 +3,6 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', 'MainFactory', functi
 // Fetch all song data; store in $scope.songData
     let rootDir;
 
-
-
     MainFactory.getApiRoot() // Get the API Root directory; this is saved as a fulfilled promise in MainFactory
         .then(root => {
             rootDir = root;                     // Save root directory locally as rootDir
