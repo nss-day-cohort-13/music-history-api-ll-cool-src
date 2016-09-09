@@ -3,8 +3,6 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', 'MainFactory', functi
 // Fetch all song data; store in $scope.songData
     let rootDir;
 
-
-
     MainFactory.getApiRoot() // Get the API Root directory; this is saved as a fulfilled promise in MainFactory
         .then(root => {
             rootDir = root;                     // Save root directory locally as rootDir
@@ -30,11 +28,6 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', 'MainFactory', functi
         },
             err => console.log("error", err)
         )
-        .then(() => {
-            console.log("artists:", $scope.artists);
-            console.log("albums:", $scope.albums);
-            console.log("tracks:", $scope.tracks);
-        })
 
 // Search bar
     $scope.userSearch = '';
@@ -62,7 +55,6 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', 'MainFactory', functi
         .then(artist => {
             $scope.artists.push(artist.data)
         })
-        console.log("Artist", $scope.name)
     }
 
     $scope.completeAlbum = () => {
@@ -75,7 +67,6 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', 'MainFactory', functi
         .then(album => {
             $scope.albums.push(album.data)
         })
-        console.log("Album Name", $scope.albumTitle)
     }
 
     $scope.completeTrack = () => {
@@ -88,7 +79,6 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', 'MainFactory', functi
         .then(track => {
             $scope.tracks.push(track.data)
         })
-        console.log("Track Name", $scope.trackTitle)
     }
 
     $scope.deleteTrack = (item) => {
@@ -109,6 +99,9 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', 'MainFactory', functi
             headers: {"Content-Type": "application/json"}
         })
         .then(() => {
+            $scope.tracks = $scope.tracks.filter((track) => {
+                return track.album !== `http://localhost:8000/albums/${item.id}/`;
+            })
             $scope.albums.splice($scope.albums.indexOf(item), 1)
         })
     }
@@ -120,6 +113,22 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', 'MainFactory', functi
             headers: {"Content-Type": "application/json"}
         })
         .then(() => {
+            // Tracks need to be deleted first, but we need the album IDs of the
+            // tracks we want to delete.
+            let albumUrls = [];
+            $scope.albums.forEach((album) => {
+                if (album.artist === `http://localhost:8000/artists/${item.id}/`) {
+                    albumUrls.push(album.url);
+                }
+            })
+            // Now, delete the songs associated with those albums
+            $scope.tracks = $scope.tracks.filter((track) => {
+                return albumUrls.indexOf(track.album) === -1;
+            })
+            // Finally, delete the albums associted with the artist
+            $scope.albums = $scope.albums.filter((album) => {
+                return album.artist !== `http://localhost:8000/artists/${item.id}/`;
+            })
             $scope.artists.splice($scope.artists.indexOf(item), 1)
         })
     }
@@ -135,7 +144,6 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', 'MainFactory', functi
         $scope.showArtist = null;
         $scope.showAlbum = null;
         $scope.showCategory = category;
-        console.log("category: ", $scope.showCategory);
     }
 
     $scope.showArtistAlbums = (artist) => {
