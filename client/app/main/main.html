@@ -21,13 +21,13 @@
             <div class="form-group">
                 <label>Filter by artist:</label>
                 <select ng-model="showArtist" ng-change="showAlbum = null" ng-disabled="showCategory === 'artists' || showCategory === 'albums'">
-                    <option ng-repeat="artist in artists" value="{{artist.name}}">{{ artist.name }}</option>
+                    <option ng-repeat="artist in artists" value="{{artist.name}}">{{ artist.name | optionLengthFilter }}</option>
                 </select>
                 </div>
             <div class="form-group">
                 <label>Filter by album:</label>
                 <select ng-model="showAlbum" ng-change="showArtist = getArtistName(showAlbum, true)" ng-disabled="showCategory === 'artists' || showCategory === 'albums'">
-                    <option ng-repeat="album in albums" value="{{album.title}}" ng-show="showArtist === null ? true : getArtistName(album.artist) === showArtist">{{ album.title }}</option>
+                    <option ng-repeat="album in albums" value="{{album.title}}" ng-show="showArtist === null ? true : getArtistName(album.artist) === showArtist">{{ album.title | optionLengthFilter }}</option>
                 </select>
             </div>
             <button class="btn btn-default" ng-click="clearFilters()">Clear</button>
